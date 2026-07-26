@@ -20,7 +20,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push Docker image!!!
+      - name: Build and push Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/skills-publish-docker-images/stackoverflown:latest .
-          docker push ghcr.io/${{ github.repository_owner }}/skills-publish-docker-images/stackoverflown:latest
+          docker build . -t ghcr.io/${{ github.repository_owner }}/skills-publish-docker-images/stackoverflown:master
+          docker push ghcr.io/${{ github.repository_owner }}/skills-publish-docker-images/stackoverflown:master
