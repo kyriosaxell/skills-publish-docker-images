@@ -41,4 +41,4 @@ jobs:
           platforms: linux/amd64, linux/arm64
           tags: |
             ghcr.io/${{ github.repository_owner }}/skills-publish-docker-images:master
-            ghcr.io/${{ github.repository_owner }}/skills-publish-docker-images:{% raw %}${{ github.sha }}{% endraw %}
+            ghcr.io/${{ github.repository_owner }}/skills-publish-docker-images:${{ github.sha }}
