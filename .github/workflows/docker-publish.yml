@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - master
+    tags:
+      - "v*"
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -23,12 +29,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # Soporta características de construcción, secretos, caché remota y construcción avanzada multiplataforma.
-#      - name: Build and push Docker image
-#        uses: docker/build-push-action@v7
-#        with:
-#          context: .
-#          push: true
-#          tags: ghcr.io/${{ github.actor }}/skills-publish-docker-images:master
+      #      - name: Build and push Docker image
+      #        uses: docker/build-push-action@v7
+      #        with:
+      #          context: .
+      #          push: true
+      #          tags: ghcr.io/${{ github.actor }}/skills-publish-docker-images:master
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Buildx
@@ -39,6 +45,4 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64, linux/arm64
-          tags: |
-            ghcr.io/${{ github.repository_owner }}/skills-publish-docker-images:master
-            ghcr.io/${{ github.repository_owner }}/skills-publish-docker-images:${{ github.sha }}
+          tags: ${{ steps.meta.outputs.tags }}
