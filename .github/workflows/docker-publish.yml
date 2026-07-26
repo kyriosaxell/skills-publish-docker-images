@@ -39,6 +39,11 @@ jobs:
         uses: docker/setup-qemu-action@v3
       - name: Set up Buildx
         uses: docker/setup-buildx-action@v4
+      - name: Extrae la metadata para Docker
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/skills-publish-docker-image:master
       - name: Build and Push Docker image
         uses: docker/build-push-action@v7
         with:
